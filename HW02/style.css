@@ -1,0 +1,77 @@
+#DIV {
+  width: 1600px;
+  height: 900px;
+  margin: 0px auto;
+  border: 1px solid black;
+}
+
+#d_Top {
+  width: 1600px;
+  height: 100px;
+  border: 1px solid black;
+  text-align: right;
+}
+
+#d_Left {
+  width: 399px;
+  height: 798px;
+  float: left;
+  position: absolute;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#d_Right {
+  width: 1199px;
+  height: 798px;
+  float: right;
+  border: 1px solid black;
+}
+
+#student_id {
+  font-size: 68px;
+  margin-right: 70px;
+}
+
+#student_name {
+  font-size: 68px;
+  padding-right: 70px;
+}
+
+#button1, #button2 {
+  width: 300px;
+  height: 100px;
+  font-size: 50px;
+  margin: 8px;
+  padding: 8px;
+}
+
+#empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+}
+
+#myCanvas {
+  border: 1px solid black;
+  display: none;
+}
+
+#d_RightChild {
+  width: 1199px;
+  height: 798px;
+  float: right;
+  border: 1px solid black;
+  display: none;
+}
+
+#lol {
+  float: left;
+  margin: 50px;
+}
+
+#d_RightChild li {
+  margin: 50px;
+  font-size: 20px;
+}

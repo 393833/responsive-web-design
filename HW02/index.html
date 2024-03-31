@@ -1,0 +1,81 @@
+<<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>202027044_장민혁</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <div id="DIV">
+      <div id="d_Top">
+        <span id="student_id">202027044</span>
+        <span id="student_name">장민혁</span>
+      </div>
+      <div id="d_Left">
+        <button type="button" id="button1">버튼1</button>
+        <button type="button" id="button2">버튼2</button>
+      </div>
+      <div id="d_Right">
+        <p id="empty">빈화면</p>
+        <canvas id="myCanvas" width="1199" height="798"></canvas>
+          <div id="d_RightChild">
+            <img src="lol.jpg" id="lol">
+            <li>게임의 이름 : 리그오브레전드</li>
+            <li>출시년도 : 2009년</li>
+            <li>장르 : MOBA</li>
+            <li>좋아하는 이유 : 게임의 업데이트가 매우 활발하며 챔피언들이 개성이
+            넘치고 유사 다른게임들과 비교해봤을 때 가장 재미있다.
+            어릴적부터 지금까지 꾸준히 해왔고 제일 잘 하는 게임이라서
+            좋아한다.</li>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    var button1 = document.getElementById('button1');
+    var button2 = document.getElementById('button2');
+    var d_Right = document.getElementById('d_Right');
+    var d_RightChild = document.getElementById('d_RightChild');
+    var empty = document.getElementById('empty');
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    button1.addEventListener('click', function() {
+      if (canvas.style.display == 'none') {
+          canvas.style.display = 'block';
+          empty.style.display = 'none';
+          drawCircle();
+          button2.disabled = true;
+      } else {
+         canvas.style.display = 'none';
+         empty.style.display = 'block';
+         button2.disabled = false;
+      }
+    });
+
+    function drawCircle() {
+      ctx.beginPath();
+      var radius = 300;
+      ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2*Math.PI)
+      ctx.stroke();
+    }
+
+    button2.addEventListener('click', function() {
+    if(d_RightChild.style.display == 'none') {
+        d_RightChild.style.display = 'block';
+        empty.style.display = 'none';
+        button1.disabled = true;
+    } else {
+        d_RightChild.style.display = 'none';
+        empty.style.display = 'block';
+        button1.disabled = false;
+    }
+
+  });
+
+    </script>
+  </body>
+</html>
