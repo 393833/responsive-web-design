@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        canvas{
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="1024" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let angle = 0;
+        let triangleColor = 'blue';
+        const sideLength = 200;
+        const height = Math.sqrt(3) / 2 * sideLength;
+
+        function drawEquilateralTriangle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(angle);
+
+            ctx.beginPath();
+            ctx.moveTo(0, -height / 2);
+            ctx.lineTo(sideLength / 2, height / 2);
+            ctx.lineTo(-sideLength / 2, height / 2);
+            ctx.closePath();
+
+            ctx.fillStyle = triangleColor;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function animate() {
+            angle += 0.01;
+            drawEquilateralTriangle();
+            requestAnimationFrame(animate);
+        }
+
+        function isPointInTriangle(px, py, x1, y1, x2, y2, x3, y3) {
+            const areaOrig = Math.abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1));
+            const area1 = Math.abs((x1 - px) * (y2 - py) - (x2 - px) * (y1 - py));
+            const area2 = Math.abs((x2 - px) * (y3 - py) - (x3 - px) * (y2 - py));
+            const area3 = Math.abs((x3 - px) * (y1 - py) - (x1 - px) * (y3 - py));
+            return area1 + area2 + area3 === areaOrig;
+        }
+
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const clickY = event.clientY - rect.top;
+
+            const transformedX = clickX - canvas.width / 2;
+            const transformedY = clickY - canvas.height / 2;
+
+            const x1 = 0, y1 = -height / 2;
+            const x2 = sideLength / 2, y2 = height / 2;
+            const x3 = -sideLength / 2, y3 = height / 2;
+
+            const cos = Math.cos(-angle);
+            const sin = Math.sin(-angle);
+
+            const rotateX = (x, y) => x * cos - y * sin;
+            const rotateY = (x, y) => x * sin + y * cos;
+
+            const x1r = rotateX(x1, y1), y1r = rotateY(x1, y1);
+            const x2r = rotateX(x2, y2), y2r = rotateY(x2, y2);
+            const x3r = rotateX(x3, y3), y3r = rotateY(x3, y3);
+
+            if (isPointInTriangle(transformedX, transformedY, x1r, y1r, x2r, y2r, x3r, y3r)) {
+                triangleColor = triangleColor === 'blue' ? 'red' : 'blue';
+            }
+        });
+
+        animate();
+    </script>
+</body>
+</html>
